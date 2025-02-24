@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QString a5 = "oneoneoneoneoneoneoneoneoneoneoneoneoneoneoneone";
     QString b5 = "twotwotwotwotwotwotwotwotwotwotwotwotwotwotwotwo";
+
     QVector <double> N {static_cast<double>(a1.length()), static_cast<double>(a2.length()), static_cast<double>(a3.length()), static_cast<double>(a4.length()), static_cast<double>(a5.length())};
     QVector <QString*> A {&a1,&a2,&a3,&a4,&a5};
     QVector <QString*> B {&b1,&b2,&b3,&b4,&b5};
