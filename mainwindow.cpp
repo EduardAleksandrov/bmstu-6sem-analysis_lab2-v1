@@ -1,3 +1,4 @@
+// step two
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <ctime>
@@ -9,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     leven = new Levenshtein(this);
+    ui->radioButton->setChecked(true);
 
     QString a1 = "one";
     QString b1 = "two";
@@ -29,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     QVector <QString*> A {&a1,&a2,&a3,&a4,&a5};
     QVector <QString*> B {&b1,&b2,&b3,&b4,&b5};
 
+// Матрица Левенштейна
     QVector <double> timer_result_leven;
     for(int i = 0; i < A.size(); i++)
     {
@@ -36,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
         clock_t start_one = clock();
         for(unsigned int j = 0; j < 10; j++)
         {
-            result_leven = leven->distance(*(A[i]), *(B[i]));
+            result_leven = leven->distance_matrix(*(A[i]), *(B[i]));
         }
         clock_t end_one = clock();
         double result_one = (double(end_one - start_one) / CLOCKS_PER_SEC) * 1000000 / 10; // microseconds
@@ -53,31 +56,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->widget_11->yAxis->setLabel("t, ms");
     ui->widget_11->xAxis->setRange(0, 60);
     ui->widget_11->yAxis->setRange(0, 750);
+// ---
 
-    QVector <double> timer_result_leven_damer;
-    for(int i = 0; i < A.size(); i++)
-    {
-        int result_leven;
-        clock_t start_one = clock();
-        for(unsigned int j = 0; j < 10; j++)
-        {
-            result_leven = leven->distance_damer(*(A[i]), *(B[i]));
-        }
-        clock_t end_one = clock();
-        double result_one = (double(end_one - start_one) / CLOCKS_PER_SEC) * 1000000 / 10; // microseconds
-        timer_result_leven_damer.push_back(result_one);
-    }
-
-    ui->widget_22->clearGraphs();
-    ui->widget_22->addGraph();
-    ui->widget_22->graph(0)->setData(N, timer_result_leven_damer);
-    ui->widget_22->graph(0)->setPen(QColor(50, 50, 50, 255));
-    ui->widget_22->graph(0)->setLineStyle(QCPGraph::lsNone);
-    ui->widget_22->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, Qt::blue, Qt::white, 5));
-    ui->widget_22->xAxis->setLabel("N");
-    ui->widget_22->yAxis->setLabel("t, ms");
-    ui->widget_22->xAxis->setRange(0, 60);
-    ui->widget_22->yAxis->setRange(0, 750);
 
 }
 
@@ -90,17 +70,24 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     ui->lineEdit_3->clear();
-    int check_box_damerau = ui->checkBox->isChecked();
 
     QString a = ui->lineEdit->text();
     QString b = ui->lineEdit_2->text();
 
+    QVector<QVector<int>> dp(a.length() + 1, QVector<int>(b.length() + 1, -1)); // Инициализация матрицы
+
     int result;
-    if(check_box_damerau)
+    if(ui->radioButton->isChecked())
     {
-        result = leven->distance_damer(a, b, true);
+        result = leven->distance_matrix(a, b, true);
+    } else if(ui->radioButton_2->isChecked())
+    {
+        result = leven->distance_recursion(a, a.length(), b, b.length());
+    } else if(ui->radioButton_3->isChecked())
+    {
+        result = leven->distance_massive(a, b);
     } else {
-        result = leven->distance(a, b, true);
+        result = leven->distance_tail_recursion(a, a.length(), b, b.length(), dp);
     }
 
     ui->lineEdit_3->setText(QString::number(result));
