@@ -152,14 +152,14 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>470</x>
       <y>320</y>
-      <width>251</width>
+      <width>301</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Хвостовая рекурсия Левенштейна</string>
+     <string>Рекурсия с аккумулятором Левенштейна</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">
@@ -218,12 +218,12 @@
       <rect>
        <x>10</x>
        <y>120</y>
-       <width>112</width>
+       <width>131</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>Хвостовая р</string>
+      <string>Аккумулятор р</string>
      </property>
     </widget>
    </widget>

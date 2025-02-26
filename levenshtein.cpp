@@ -68,7 +68,7 @@ unsigned int Levenshtein::ReplaceCost(QChar a, QChar b)
     return (a != b);
 }
 
-int Levenshtein::distance_recursion(QString s1, int n1, QString s2, int n2)
+int Levenshtein::distance_recursion(QString& s1, int n1, QString& s2, int n2)
 {
     if (n1 == 0)
         return n2;
@@ -82,7 +82,7 @@ int Levenshtein::distance_recursion(QString s1, int n1, QString s2, int n2)
     return std::min({insertCost, deleteCost, replaceCost});
 }
 
-int Levenshtein::distance_tail_recursion(QString s1, int n1, QString s2, int n2, QVector<QVector<int>>& dp)
+int Levenshtein::distance_tail_recursion(QString& s1, int n1, QString& s2, int n2, QVector<QVector<int>>& dp)
 {
     if (dp[n1][n2] != -1) {
         return dp[n1][n2]; // Возвращаем уже вычисленное значение
