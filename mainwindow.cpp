@@ -21,15 +21,18 @@ MainWindow::MainWindow(QWidget *parent)
     QString a3 = "oneoneone";
     QString b3 = "twotwotwo";
 
-    QString a4 = "oneoneoneoneoneoneoneone";
-    QString b4 = "twotwotwotwotwotwotwotwo";
+    QString a4 = "oneoneoneon";
+    QString b4 = "twotwotwotw";
 
-    QString a5 = "oneoneoneoneoneoneoneoneoneoneoneoneoneoneoneone";
-    QString b5 = "twotwotwotwotwotwotwotwotwotwotwotwotwotwotwotwo";
+    QString a5 = "oneoneoneoneoneoneoneone";
+    QString b5 = "twotwotwotwotwotwotwotwo";
 
-    QVector <double> N {static_cast<double>(a1.length()), static_cast<double>(a2.length()), static_cast<double>(a3.length()), static_cast<double>(a4.length()), static_cast<double>(a5.length())};
-    QVector <QString*> A {&a1,&a2,&a3,&a4,&a5};
-    QVector <QString*> B {&b1,&b2,&b3,&b4,&b5};
+    QString a6 = "oneoneoneoneoneoneoneoneoneoneoneoneoneoneoneone";
+    QString b6 = "twotwotwotwotwotwotwotwotwotwotwotwotwotwotwotwo";
+
+    QVector <double> N {static_cast<double>(a1.length()), static_cast<double>(a2.length()), static_cast<double>(a3.length()), static_cast<double>(a4.length()), static_cast<double>(a5.length()), static_cast<double>(a6.length())};
+    QVector <QString*> A {&a1,&a2,&a3,&a4,&a5,&a6};
+    QVector <QString*> B {&b1,&b2,&b3,&b4,&b5,&b6};
 
 // Матрица Левенштейна
     QVector <double> timer_result_leven;
@@ -60,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 // Рекурсия Левенштейна
     QVector <double> timer_result_leven_rec;
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 4; i++)
     {
         int result_leven;
         clock_t start_one = clock();
