@@ -77,17 +77,17 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
 //    ui->lineEdit_3->setText(QString::number(timer_result_leven_rec[2]));
-
+    QVector <double> NN {N[0], N[1], N[2], N[3]};
     ui->widget_33->clearGraphs();
     ui->widget_33->addGraph();
-    ui->widget_33->graph(0)->setData(N, timer_result_leven_rec);
+    ui->widget_33->graph(0)->setData(NN, timer_result_leven_rec);
     ui->widget_33->graph(0)->setPen(QColor(50, 50, 50, 255));
 //    ui->widget_33->graph(0)->setLineStyle(QCPGraph::lsNone);
     ui->widget_33->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, Qt::blue, Qt::white, 5));
     ui->widget_33->xAxis->setLabel("N");
     ui->widget_33->yAxis->setLabel("t, ms");
-    ui->widget_33->xAxis->setRange(0, 60);
-    ui->widget_33->yAxis->setRange(0, 140000);
+    ui->widget_33->xAxis->setRange(0, 15);
+    ui->widget_33->yAxis->setRange(0, 1000000);
 // ---
 
 // Массив Левенштейна
